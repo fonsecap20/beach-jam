@@ -115,4 +115,9 @@ public class ShipController : MonoBehaviour
     {
         return rb.velocity.magnitude;
     }
+
+    public float GetMaxTetherLength()
+    {
+        return tetherMaxLength;
+    }
 }
