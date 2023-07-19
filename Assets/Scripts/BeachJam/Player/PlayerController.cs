@@ -58,6 +58,9 @@ public class PlayerController : MonoBehaviour
         {
             HandleInputs();
         }
+        //Always face the player in direciton of movement
+        // float facingAngle = Mathf.Atan2(rb.velocity.y, rb.velocity.x);
+        // gameObject.transform.rotation = new Quaternion(0, 0, facingAngle, 0);
     }
 
     private void HandleInputs()
