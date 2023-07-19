@@ -11,12 +11,12 @@ public class CameraFollow : MonoBehaviour
     public Transform playerTransform;
     public Vector3 offset;
     private Camera playerCamera;
-    private PC_Physics playerScript;
+    private ShipController playerScript;
 
     private void Start()
     {
         playerCamera = GetComponent<Camera>();
-        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PC_Physics>();
+        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
         targetZoom = minZoom;
     }
 
