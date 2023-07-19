@@ -196,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startSpeed: 5
   defaultSpeed: 5
-  timeToMaxSpeed: 3
+  timeToMaxSpeed: 0
   startSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -221,6 +221,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  minSpeed: 5
+  maxSpeed: 5
+  maxUses: 10
+  cooldownTime: 3
+  addedVelocity: 0
 --- !u!61 &426999602
 BoxCollider2D:
   m_ObjectHideFlags: 0
