@@ -385,7 +385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &293959369
 Transform:
   m_ObjectHideFlags: 0
@@ -709,9 +709,9 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
+  - component: {fileID: 519420034}
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
-  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -754,7 +754,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -812,6 +812,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8f65529b3b10b4faf2de7445577a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxZoom: 15
+  minZoom: 10
+  speedZoomCoefficient: 0.75
   playerTransform: {fileID: 677636370}
   offset: {x: 0, y: 0, z: -5}
 --- !u!1001 &526523358
@@ -1237,7 +1240,7 @@ MonoBehaviour:
     m_Bits: 8
   tetherMaxLength: 15
   tetherPullForce: 10
-  tetherPullTime: 2
+  tetherPullTime: 1
   tetherPullCurve:
     serializedVersion: 2
     m_Curve:

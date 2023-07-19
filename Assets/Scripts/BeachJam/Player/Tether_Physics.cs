@@ -16,38 +16,51 @@ public class Tether_Physics : MonoBehaviour
     private float tetherPullTimer;
     private LineRenderer lineRenderer;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.enabled = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         HandleInputs();
+        UpdateLineRenderer();
     }
 
     private void HandleInputs()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, mousePosition - transform.position, tetherMaxLength, tetherableLayer);
-
-            if (hit.collider != null)
+            if (tetheredObject == null)
             {
-                tetheredObject = hit.collider.gameObject;
-                tetherPullTimer = 0f;
-                lineRenderer.enabled = true;
+                TryToTether();
             }
         }
-        if (Input.GetMouseButtonUp(0))
+        else
         {
-            tetheredObject = null;
-            lineRenderer.enabled = false;
+            Untether();
         }
+    }
+
+    private void TryToTether()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, mousePosition - transform.position, tetherMaxLength, tetherableLayer);
+
+        if (hit.collider != null)
+        {
+            tetheredObject = hit.collider.gameObject;
+            tetherPullTimer = 0f;
+            lineRenderer.enabled = true;
+        }
+    }
+
+    private void Untether()
+    {
+        tetheredObject = null;
+        lineRenderer.enabled = false;
     }
 
     private void FixedUpdate()
@@ -58,6 +71,13 @@ public class Tether_Physics : MonoBehaviour
             float currentPullForce = tetherPullForce * tetherPullCurve.Evaluate(tetherPullTimer / tetherPullTime);
             rb.AddForce(direction * currentPullForce);
             tetherPullTimer += Time.fixedDeltaTime;
+        }
+    }
+
+    private void UpdateLineRenderer()
+    {
+        if (tetheredObject != null)
+        {
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, tetheredObject.transform.position);
         }

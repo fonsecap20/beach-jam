@@ -37,7 +37,12 @@ public class PC_Physics : MonoBehaviour
     {
         if (hasStarted)
         {
-
+            Debug.Log(GetMagnitude());
         }
+    }
+
+    public float GetMagnitude()
+    {
+        return rb.velocity.magnitude;
     }
 }
