@@ -97,10 +97,12 @@ public class Tether : MonoBehaviour
         float radius = Vector2.Distance(transform.position, anchorPoint);
         float rotationSpeed = GetComponent<PlayerController>().defaultSpeed / 2f;
         float currentAngle = FindAngle(anchorPoint);
-        bool counterClock = gameObject.transform.eulerAngles.z-180 > currentAngle*180/Mathf.PI;
-
-        Debug.Log("Current angle: "+ currentAngle*180/Mathf.PI + ", Facing angle: " + (gameObject.transform.eulerAngles.z-180) + ", Counter Clock: " + counterClock);
-
+        
+        // Calculate the rotation direction using cross product
+        Vector3 anchorToPlayer = transform.position - anchorPoint;
+        Vector3 tangent = Vector3.Cross(Vector3.forward, anchorToPlayer);
+        bool counterClock = Vector3.SignedAngle(anchorToPlayer, gameObject.transform.right, Vector3.forward) > 0;
+            
         while (Input.GetMouseButton(0))
         {
             // Calculate the new position using trigonometry
@@ -108,14 +110,12 @@ public class Tether : MonoBehaviour
             float y = anchorPoint.y + radius * Mathf.Sin(currentAngle);
             Vector3 newPosition = new Vector3(x, y);
 
-            // Make player face the circular movement.
-            Vector2 direction = new Vector2(-Mathf.Sin(currentAngle-Mathf.PI/2), Mathf.Cos(currentAngle-Mathf.PI/2));
-
-            // Set the rotation of the object to face the direction
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
-
             // Assign the new position to the object's transform
             transform.position = newPosition;
+
+            anchorToPlayer = transform.position - anchorPoint;
+            // Set the rotation of the object to face the direction
+            
 
             // Adjust the tether to move with the player.
             lineRenderer.SetPosition(0, transform.position);
@@ -123,8 +123,10 @@ public class Tether : MonoBehaviour
 
             // Increment the angle based on rotation speed and time
             if(counterClock){
+                transform.rotation = Quaternion.LookRotation(Vector3.forward, -anchorToPlayer);
                 currentAngle += rotationSpeed * Time.deltaTime;
             }else{
+                transform.rotation = Quaternion.LookRotation(Vector3.forward, anchorToPlayer);
                 currentAngle -= rotationSpeed * Time.deltaTime;
             }
 
@@ -137,7 +139,7 @@ public class Tether : MonoBehaviour
         lineRenderer.SetPosition(1, transform.position);
 
         // Send player off in direction they were facing.
-        GetComponent<Rigidbody2D>().velocity = transform.up * GetComponent<PlayerController>().defaultSpeed;
+        GetComponent<Rigidbody2D>().velocity = transform.right * GetComponent<PlayerController>().defaultSpeed;
 
         tetherIsEjected = false;
     }
