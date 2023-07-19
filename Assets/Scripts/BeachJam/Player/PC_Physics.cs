@@ -39,6 +39,8 @@ public class PC_Physics : MonoBehaviour
         {
             Debug.Log(GetMagnitude());
         }
+        Vector3 faceDirection = rb.velocity;
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, faceDirection);
     }
 
     public float GetMagnitude()
