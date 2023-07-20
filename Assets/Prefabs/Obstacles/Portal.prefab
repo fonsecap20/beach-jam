@@ -251,7 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portalA: {fileID: 9082136313684068988}
   portalB: {fileID: 9082136314489485640}
-  teleportDelay: 1
+  teleportDelay: 0.52
 --- !u!50 &9082136315104511089
 Rigidbody2D:
   serializedVersion: 4

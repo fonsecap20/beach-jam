@@ -282,7 +282,7 @@ Transform:
   - {fileID: 983752303}
   - {fileID: 615262056}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &441252886
 GameObject:
@@ -462,7 +462,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -500,14 +500,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d73b3ed8fef1cb4438b73ddc7203b1df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 677636370}
   offset: {x: 0, y: 0, z: -5}
-  smoothSpeed: 0.5
+  smoothSpeed: 5
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,13 +515,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad8f65529b3b10b4faf2de7445577a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxZoom: 20
-  minZoom: 10
+  maxZoom: 30
+  minZoom: 20
   speedZoomCoefficient: 0.75
   playerTransform: {fileID: 677636370}
   offset: {x: 0, y: 0, z: -5}
@@ -1787,6 +1787,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2392752713944425106, guid: 2e74c81711b4fa24aa435f90ba2c2841, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2392752713944425107, guid: 2e74c81711b4fa24aa435f90ba2c2841, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1844,9 +1848,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5472070760032886780, guid: 6e1f7414cef25374eb9d34732e7d63a7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5472070760032886781, guid: 6e1f7414cef25374eb9d34732e7d63a7, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5472070760032886781, guid: 6e1f7414cef25374eb9d34732e7d63a7, type: 3}
       propertyPath: m_LocalPosition.x
