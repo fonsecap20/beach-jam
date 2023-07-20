@@ -20,21 +20,16 @@ public class CameraFollow : MonoBehaviour
         targetZoom = minZoom;
     }
 
-    private void Update()
-    {
-        CameraZoom();
-    }
-
     private void LateUpdate()
     {
         Vector3 desiredPosition = playerTransform.position + offset;
         transform.position = desiredPosition;
+        CameraZoom();
     }
 
     private void CameraZoom()
     {
         targetZoom = playerScript.GetMagnitude() * speedZoomCoefficient;
         playerCamera.orthographicSize = Mathf.Clamp(Mathf.Lerp(playerCamera.orthographicSize, targetZoom, Time.deltaTime), minZoom, maxZoom);
-
     }
 }
