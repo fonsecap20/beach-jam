@@ -51,7 +51,7 @@ public class ShipController : MonoBehaviour
         {
             HandleInputs();
             UpdateLineRenderer();
-            Debug.Log(GetMagnitude());
+            //Debug.Log(GetMagnitude());
         }
         Vector3 faceDirection = rb.velocity;
         transform.rotation = Quaternion.LookRotation(Vector3.forward, faceDirection);

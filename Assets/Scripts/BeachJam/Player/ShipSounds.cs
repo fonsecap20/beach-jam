@@ -18,7 +18,7 @@ public class ShipSounds : MonoBehaviour
     void Update()
     {
         audioSource.pitch = Mathf.Clamp(shipController.GetMagnitude() * speedToPitchCoefficient, 1f, 10f);
-        Debug.Log(audioSource.pitch);
+        //Debug.Log(audioSource.pitch);
     }
 
     public void StartSoundLoop()
