@@ -120,4 +120,9 @@ public class ShipController : MonoBehaviour
     {
         return tetherMaxLength;
     }
+
+    public Vector2 GetVelocity()
+    {
+        return rb.velocity;
+    }
 }
