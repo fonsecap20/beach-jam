@@ -95,6 +95,7 @@ public class LevelLoader : MonoBehaviour
         }
 
         SceneManager.LoadScene(sceneIndex);
+        EventBus.Publish<SceneChangeEvent>(new SceneChangeEvent());
     }
 }
 
@@ -105,5 +106,12 @@ public class SceneTransitionRequest
     public SceneTransitionRequest(int _sceneIndex)
     {
         sceneIndex = _sceneIndex;
+    }
+}
+
+public class SceneChangeEvent
+{
+    public SceneChangeEvent()
+    {
     }
 }

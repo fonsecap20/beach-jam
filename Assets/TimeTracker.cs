@@ -9,13 +9,14 @@ public class TimeTracker : MonoBehaviour
 
     private Text clockText;
     private float timer = 0f;
+    private bool trackTime = false;
 
     // Subscriptions
     Subscription<SceneTransitionRequest> scene_transition_request_subscription;
+    Subscription<SceneChangeEvent> scene_change_subscription;
 
     public void ResetTimer()
     {
-        scene_transition_request_subscription = EventBus.Subscribe<SceneTransitionRequest>(_OnSceneTransitionRequest);
         timer = 0;
     }
 
@@ -38,14 +39,21 @@ public class TimeTracker : MonoBehaviour
 
     private void Start()
     {
+        scene_transition_request_subscription = EventBus.Subscribe<SceneTransitionRequest>(_OnSceneTransitionRequest);
+        scene_change_subscription = EventBus.Subscribe<SceneChangeEvent>(_OnSceneChange);
+
         clockText = transform.GetComponentInChildren<Text>();
+        trackTime = true;
         ResetTimer();
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        UpdateClockText();
+        if (trackTime)
+        {
+            timer += Time.deltaTime;
+            UpdateClockText();
+        }
     }
 
     private void UpdateClockText()
@@ -59,10 +67,16 @@ public class TimeTracker : MonoBehaviour
     void _OnSceneTransitionRequest(SceneTransitionRequest s)
     {
         EventBus.Publish<LevelFinishedEvent>(new LevelFinishedEvent(timer));
+        trackTime = false;
 
         if (s.sceneIndex == 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    void _OnSceneChange(SceneChangeEvent s)
+    {
+        trackTime = true;
     }
 }
