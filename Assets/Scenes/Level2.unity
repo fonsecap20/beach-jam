@@ -504,9 +504,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73b3ed8fef1cb4438b73ddc7203b1df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 677636370}
   offset: {x: 0, y: 0, z: -5}
-  smoothSpeed: 0.5
+  smoothSpeed: 5
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,6 +531,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1210057957745344791, guid: 6eb5dc8eb2f976a49861a1d976c1e7ab, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000030517578
+      objectReference: {fileID: 0}
     - target: {fileID: 1210057958734564104, guid: 6eb5dc8eb2f976a49861a1d976c1e7ab, type: 3}
       propertyPath: m_RootOrder
       value: 1
