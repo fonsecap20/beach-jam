@@ -7,6 +7,8 @@ public class Portal : MonoBehaviour
     public GameObject portalA;
     public GameObject portalB;
     public float teleportDelay = 1;
+    public bool useOffset = false;
+
     //Tracks number of enters and exits to ensure the player can telelport again and isn't stuck for eternity
     float teleportTimer = 0;
 
@@ -16,11 +18,14 @@ public class Portal : MonoBehaviour
             //Check which portal is closest (the one colided with)
             float aDistance = Vector3.Distance(other.gameObject.transform.position, portalA.transform.position);
             float bDistance = Vector3.Distance(other.gameObject.transform.position, portalB.transform.position);
+            
             //And teleport to the other one    
             if(aDistance < bDistance){
-                other.gameObject.transform.position = portalB.transform.position;
+                Vector3 offset = other.transform.position - portalA.transform.position;
+                other.gameObject.transform.position = portalB.transform.position + (useOffset?offset:new Vector3(0,0,0));
             }else{
-                other.gameObject.transform.position = portalA.transform.position;
+                Vector3 offset = other.transform.position - portalB.transform.position;
+                other.gameObject.transform.position = portalA.transform.position + (useOffset?offset:new Vector3(0,0,0));
             }
             teleportTimer = teleportDelay;
         }
