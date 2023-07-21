@@ -519,8 +519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8f65529b3b10b4faf2de7445577a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxZoom: 20
-  minZoom: 10
+  maxZoom: 40
+  minZoom: 20
   speedZoomCoefficient: 0.75
   playerTransform: {fileID: 677636370}
   offset: {x: 0, y: 0, z: -5}
