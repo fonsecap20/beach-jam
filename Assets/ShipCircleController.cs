@@ -59,7 +59,7 @@ public class ShipCircleController : MonoBehaviour
 
     private void HandleInputs()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             if (tetheredObject == null)
             {
