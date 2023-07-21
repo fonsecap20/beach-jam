@@ -236,3 +236,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8364456237050305615}
   startVelocity: {x: 0, y: 0, z: 0}
+  rotationUpperBound: 50
+  rotationLowerBound: -50
