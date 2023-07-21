@@ -51,7 +51,7 @@ public class LevelLoader : MonoBehaviour
         if (scene != currScene)
         {
 
-            if (currScene == "Start" || scene == "Start")
+            if (currScene == "Start" || scene == "Start" || sceneIndex == 0)
             {
                 DeathTransition.gameObject.SetActive(true);
                 DeathTransition.SetTrigger("Start");

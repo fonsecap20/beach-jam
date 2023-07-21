@@ -18,6 +18,11 @@ public class PlayerStats : MonoBehaviour
         totalTime = 0f;
     }
 
+    public float GetTotalTime()
+    {
+        return totalTime;
+    }
+
     private void Awake()
     {
         // Typical singleton initialization code.

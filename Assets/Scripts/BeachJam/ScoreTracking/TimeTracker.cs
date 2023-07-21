@@ -76,7 +76,7 @@ public class TimeTracker : MonoBehaviour
             ResetTimer();
         }
 
-        if (s.newSceneIndex == 0)
+        if (s.newSceneIndex == 0 || s.newSceneIndex == 4)
         {
             Destroy(gameObject);
         }
