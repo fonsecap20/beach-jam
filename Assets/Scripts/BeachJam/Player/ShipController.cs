@@ -9,10 +9,11 @@ public class ShipController : MonoBehaviour
     public float defaultSpeed;
     public float timeToMaxSpeed;
     public AnimationCurve startSpeedCurve;
+    public float initialBearing;
 
-    [Header("Movement Settings")]
-    public float minSpeed;
-    public float maxSpeed;
+    //[Header("Movement Settings")]
+    //public float minSpeed;
+    //public float maxSpeed;
 
     [Header("Tether Settings")]
     public LayerMask tetherableLayer;
@@ -39,10 +40,23 @@ public class ShipController : MonoBehaviour
 
     IEnumerator BeginLevel()
     {
-        //Accelerate ship to the left
-        yield return null;
+        // another sad say of using sin cos and tan
+        Vector2 initialDirection = new Vector2(Mathf.Cos(initialBearing * Mathf.Deg2Rad), Mathf.Sin(initialBearing * Mathf.Deg2Rad));
+        float totalTime = timeToMaxSpeed;
+        float timer = 0f;
+
+        while (timer < totalTime)
+        {
+            float currentSpeed = Mathf.Lerp(startSpeed, defaultSpeed, startSpeedCurve.Evaluate(timer / totalTime));
+            rb.velocity = initialDirection * currentSpeed;
+            timer += Time.deltaTime;
+
+            yield return null;
+        }
+        rb.velocity = initialDirection * defaultSpeed;
         hasStarted = true;
     }
+
 
     // Update is called once per frame
     void Update()
