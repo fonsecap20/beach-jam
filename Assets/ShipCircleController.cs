@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipController : MonoBehaviour
+public class ShipCircleController : MonoBehaviour
 {
     [Header("Starting Sequence Vars")]
     public float startSpeed;
     public float defaultSpeed;
     public float timeToMaxSpeed;
     public AnimationCurve startSpeedCurve;
-    public float initialBearing;
 
-    //[Header("Movement Settings")]
-    //public float minSpeed;
-    //public float maxSpeed;
+    [Header("Movement Settings")]
+    public float minSpeed;
+    public float maxSpeed;
 
     [Header("Tether Settings")]
     public LayerMask tetherableLayer;
@@ -40,23 +39,10 @@ public class ShipController : MonoBehaviour
 
     IEnumerator BeginLevel()
     {
-        // another sad say of using sin cos and tan
-        Vector2 initialDirection = new Vector2(Mathf.Cos(initialBearing * Mathf.Deg2Rad), Mathf.Sin(initialBearing * Mathf.Deg2Rad));
-        float totalTime = timeToMaxSpeed;
-        float timer = 0f;
-
-        while (timer < totalTime)
-        {
-            float currentSpeed = Mathf.Lerp(startSpeed, defaultSpeed, startSpeedCurve.Evaluate(timer / totalTime));
-            rb.velocity = initialDirection * currentSpeed;
-            timer += Time.deltaTime;
-
-            yield return null;
-        }
-        rb.velocity = initialDirection * defaultSpeed;
+        //Accelerate ship to the left
+        yield return null;
         hasStarted = true;
     }
-
 
     // Update is called once per frame
     void Update()
@@ -73,7 +59,7 @@ public class ShipController : MonoBehaviour
 
     private void HandleInputs()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             if (tetheredObject == null)
             {
@@ -83,6 +69,9 @@ public class ShipController : MonoBehaviour
         else
         {
             Untether();
+        }
+        if(Input.GetKey(KeyCode.Space)){
+            rb.AddForce(transform.up * 1);
         }
     }
 
@@ -110,8 +99,12 @@ public class ShipController : MonoBehaviour
         if (tetheredObject != null)
         {
             Vector2 direction = (tetheredObject.transform.position - transform.position).normalized;
-            float currentPullForce = tetherPullForce * tetherPullCurve.Evaluate(tetherPullTimer / tetherPullTime);
-            rb.AddForce(direction * currentPullForce);
+            Vector2 tangent = Vector2.Perpendicular(direction).normalized;
+            Vector2 tangentVel = Vector3.Project(rb.velocity, tangent);
+            Vector2 perpVel = Vector3.Project(rb.velocity, direction);
+            // float currentPullForce = tetherPullForce * tetherPullCurve.Evaluate(tetherPullTimer / tetherPullTime);
+            Vector2 currentPullForce = direction * ((rb.mass * Mathf.Pow(tangentVel.magnitude, 2) ) / Vector2.Distance(tetheredObject.transform.position, transform.position)) - perpVel;
+            rb.AddForce(currentPullForce);
             tetherPullTimer += Time.fixedDeltaTime;
         }
     }

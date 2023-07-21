@@ -8,14 +8,16 @@ public class CameraFollow : MonoBehaviour
     public float minZoom;
     public float speedZoomCoefficient;
     private float targetZoom;
-    public Transform playerTransform;
-    public Vector3 offset;
+    public Vector3 offset; // as long as the Z value is under 0 it can be litteraly anything but keep at 0,0,-1 for ease of use
+
+    private Transform playerTransform;
     private Camera playerCamera;
     private ShipController playerScript;
 
     private void Start()
     {
         playerCamera = GetComponent<Camera>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
         targetZoom = minZoom;
     }
