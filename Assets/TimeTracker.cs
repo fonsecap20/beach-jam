@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class TimeTracker : MonoBehaviour
@@ -12,7 +13,7 @@ public class TimeTracker : MonoBehaviour
     private bool trackTime = false;
 
     // Subscriptions
-    Subscription<SceneTransitionRequest> scene_transition_request_subscription;
+    Subscription<SceneTransitionEvent> scene_transition_event_subscription;
     Subscription<SceneChangeEvent> scene_change_subscription;
 
     public void ResetTimer()
@@ -39,7 +40,7 @@ public class TimeTracker : MonoBehaviour
 
     private void Start()
     {
-        scene_transition_request_subscription = EventBus.Subscribe<SceneTransitionRequest>(_OnSceneTransitionRequest);
+        scene_transition_event_subscription = EventBus.Subscribe<SceneTransitionEvent>(_OnSceneTransition);
         scene_change_subscription = EventBus.Subscribe<SceneChangeEvent>(_OnSceneChange);
 
         clockText = transform.GetComponentInChildren<Text>();
@@ -64,12 +65,18 @@ public class TimeTracker : MonoBehaviour
         clockText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    void _OnSceneTransitionRequest(SceneTransitionRequest s)
+    void _OnSceneTransition(SceneTransitionEvent s)
     {
-        EventBus.Publish<LevelFinishedEvent>(new LevelFinishedEvent(timer));
         trackTime = false;
 
-        if (s.sceneIndex == 0)
+        if (s.newSceneIndex != SceneManager.GetActiveScene().buildIndex)
+        {
+            EventBus.Publish<LevelFinishedEvent>(new LevelFinishedEvent(timer));
+
+            ResetTimer();
+        }
+
+        if (s.newSceneIndex == 0)
         {
             Destroy(gameObject);
         }

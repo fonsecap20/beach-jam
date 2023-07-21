@@ -23,7 +23,6 @@ public class LevelLoader : MonoBehaviour
     private void Start()
     {
         scene_transition_request_subscription = EventBus.Subscribe<SceneTransitionRequest>(_OnSceneTransitionRequest);
-        isTransitioning = false;
     }
 
     void _OnSceneTransitionRequest(SceneTransitionRequest s)
@@ -31,6 +30,10 @@ public class LevelLoader : MonoBehaviour
         if (!isTransitioning)
         {
             isTransitioning = true;
+
+            EventBus.Publish<SceneTransitionEvent>(new SceneTransitionEvent(s.sceneIndex));
+
+
             StartCoroutine(LoadLevel(s.sceneIndex));
         }
 
@@ -94,8 +97,9 @@ public class LevelLoader : MonoBehaviour
             yield return new WaitForSeconds(deathTransitionTime);
         }
 
-        SceneManager.LoadScene(sceneIndex);
+        isTransitioning = false;
         EventBus.Publish<SceneChangeEvent>(new SceneChangeEvent());
+        SceneManager.LoadScene(sceneIndex);
     }
 }
 
@@ -113,5 +117,15 @@ public class SceneChangeEvent
 {
     public SceneChangeEvent()
     {
+    }
+}
+
+public class SceneTransitionEvent
+{
+    public int newSceneIndex;
+
+    public SceneTransitionEvent(int _newSceneIndex)
+    {
+        newSceneIndex = _newSceneIndex;
     }
 }
