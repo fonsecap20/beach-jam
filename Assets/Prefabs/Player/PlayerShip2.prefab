@@ -163,8 +163,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  minSpeed: 5
-  maxSpeed: 40
+  initialBearing: 0
   tetherableLayer:
     serializedVersion: 2
     m_Bits: 8
