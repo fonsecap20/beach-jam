@@ -13,7 +13,7 @@ public class TetherRangeVisualizer : MonoBehaviour
 
     private void setSize()
     {
-        float scaleSize = shipController.GetMaxTetherLength() * 2f;
+        float scaleSize = shipController.GetMaxTetherLength() * 0.2875f;
         gameObject.transform.localScale = new Vector3 (scaleSize, scaleSize, 1f);
     }
 }

@@ -1,34 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Obstacle : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Vector3 startVelocity = new Vector3(0, 0, 0);
-    public float rotationUpperBound = 10;
-    public float rotationLowerBound = -10;
+    
+    public Vector3 startVelocity;
+    public float rotationUpperBound;
+    public float rotationLowerBound;
+    public Sprite[] sprites;
 
     private ShipController shipController;
-    //private SpriteRenderer
+    private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rb;
 
-    private void Start() {
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
         shipController = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (sprites.Length > 0)
+        {
+            spriteRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
+        }
+
         rb.velocity = startVelocity;
         rb.angularVelocity = Random.Range(rotationLowerBound, rotationUpperBound);
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Player")){
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
             Debug.Log("Player Collision With " + gameObject.name);
             shipController.PlayerDeath();
 
-            restartGame();       
+            restartGame();
             // EventBus.Publish<>()
         }
     }
-    public void restartGame(){
+    public void restartGame()
+    {
         EventBus.Publish<SceneTransitionRequest>(new SceneTransitionRequest(SceneManager.GetActiveScene().buildIndex));
     }
 }

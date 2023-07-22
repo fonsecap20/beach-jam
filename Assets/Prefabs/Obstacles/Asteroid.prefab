@@ -238,3 +238,9 @@ MonoBehaviour:
   startVelocity: {x: 0, y: 0, z: 0}
   rotationUpperBound: 50
   rotationLowerBound: -50
+  sprites:
+  - {fileID: 21300000, guid: 2c0e49badaf8ee24b83ea066b84f7b24, type: 3}
+  - {fileID: 21300000, guid: d8e3f45daf3dae14ea7fff32970ffe4c, type: 3}
+  - {fileID: 21300000, guid: 54f03d450e907ff48bd4f9ffcea227b4, type: 3}
+  - {fileID: 21300000, guid: 98da8ccd5fc1de64c9beb4112f3e5f17, type: 3}
+  - {fileID: 21300000, guid: 82ba48b5fa9e5d648a6300eec7529988, type: 3}
