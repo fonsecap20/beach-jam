@@ -349,6 +349,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6708307218603867817, guid: dbcf47f548bc19140ab52abccd8d6f46, type: 3}
+      propertyPath: orthographic size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708307218603867819, guid: dbcf47f548bc19140ab52abccd8d6f46, type: 3}
+      propertyPath: maxZoom
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708307218603867819, guid: dbcf47f548bc19140ab52abccd8d6f46, type: 3}
+      propertyPath: minZoom
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6708307218603867820, guid: dbcf47f548bc19140ab52abccd8d6f46, type: 3}
       propertyPath: m_Name
       value: PlayerCameraV1
