@@ -33,6 +33,16 @@ public class SceneController : MonoBehaviour
 
             EventBus.Publish<SceneTransitionRequest>(new SceneTransitionRequest(nextSceneIndex));
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            EventBus.Publish<SceneTransitionRequest>(new SceneTransitionRequest(SceneManager.GetActiveScene().buildIndex));
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EventBus.Publish<SceneTransitionRequest>(new SceneTransitionRequest(0));
+        }
     }
 
     void _OnSpaceToContinue(SpaceToContinueEvent s)
