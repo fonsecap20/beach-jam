@@ -22,11 +22,19 @@ public class ShipController : MonoBehaviour
     public float tetherPullTime;
     public AnimationCurve tetherPullCurve;
 
+    [Header("Death Settings")]
+    public SpriteRenderer shipSprite;
+    public float spriteFadeTime;
+    public float spriteFadeDelay;
+
+    private ParticleSystem deathExplosion;
     private bool hasStarted;
     private Rigidbody2D rb;
     private GameObject tetheredObject;
     private float tetherPullTimer;
     private LineRenderer lineRenderer;
+    private ShipSounds shipSounds;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +42,8 @@ public class ShipController : MonoBehaviour
         hasStarted = false;
         rb = GetComponent<Rigidbody2D>();
         lineRenderer = GetComponent<LineRenderer>();
+        deathExplosion = GetComponentInChildren<ParticleSystem>();
+        shipSounds = GetComponent<ShipSounds>();
         lineRenderer.enabled = false;
         StartCoroutine(BeginLevel());
     }
@@ -139,5 +149,31 @@ public class ShipController : MonoBehaviour
     {
         return rb.velocity;
     }
-    
+
+    public void PlayerDeath()
+    {
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.isKinematic = true;
+        deathExplosion.Play();
+        shipSounds.PlayDeathSound();
+        StartCoroutine(FadeOutSprite());
+    }
+
+    private IEnumerator FadeOutSprite()
+    {
+        yield return new WaitForSeconds(spriteFadeDelay);
+
+        float fadeRate = 1f / spriteFadeTime;
+
+        while (shipSprite.color.a > 0f)
+        {
+            float newAlpha = shipSprite.color.a - fadeRate * Time.deltaTime;
+            shipSprite.color = new Color(shipSprite.color.r, shipSprite.color.g, shipSprite.color.b, newAlpha);
+
+            yield return null;
+        }
+    }
+
+
 }

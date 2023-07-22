@@ -7,8 +7,9 @@ public class ShipSounds : MonoBehaviour
     private AudioSource audioSource;
     private ShipController shipController;
 
+    public AudioClip[] deathSounds;
     public float fadeInTime; //in seconds
-    public float speedToPitchCoefficient;   
+    public float speedToPitchCoefficient;
     public float minPitch;
     public float maxPitch;
 
@@ -40,6 +41,15 @@ public class ShipSounds : MonoBehaviour
     {
         audioSource.loop = false;
         audioSource.Stop();
+    }
+
+    public void PlayDeathSound()
+    {
+        AudioClip deathSound = deathSounds[Random.Range(0, deathSounds.Length)];
+        audioSource.Stop();
+        audioSource.loop = false;
+        audioSource.clip = deathSound;
+        audioSource.Play();
     }
 
     IEnumerator FadeIn(float time)

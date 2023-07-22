@@ -675,6 +675,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 708285664679260755, guid: 22d8703b6b800f94c839cfb329f4acb1, type: 3}
+      propertyPath: spriteFadeTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708285664679260755, guid: 22d8703b6b800f94c839cfb329f4acb1, type: 3}
+      propertyPath: spriteFadeDelay
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 708285664679260761, guid: 22d8703b6b800f94c839cfb329f4acb1, type: 3}
       propertyPath: m_Name
       value: PlayerShipV1
