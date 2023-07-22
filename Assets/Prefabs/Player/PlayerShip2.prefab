@@ -327,7 +327,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.019021988, y: -0.21875197}
+  m_Offset: {x: 0.0015716553, y: -0.09543785}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -338,8 +338,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2445698, y: 1.9375039}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.100811005, y: 0.6264325}
+  m_EdgeRadius: 0.5
 --- !u!114 &5160911502296024692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,7 +492,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   minSpeed: 5
-  maxSpeed: 40
+  maxSpeed: 20
   tetherableLayer:
     serializedVersion: 2
     m_Bits: 8
