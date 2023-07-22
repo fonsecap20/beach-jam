@@ -181,7 +181,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   tetherMaxLength: 15
-  tetherPullForce: 6
+  tetherPullForce: 5
   tetherPullTime: 1
   tetherPullCurve:
     serializedVersion: 2
