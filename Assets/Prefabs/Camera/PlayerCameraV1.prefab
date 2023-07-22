@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxZoom: 30
   minZoom: 20
-  speedZoomCoefficient: 0.75
+  speedZoomCoefficient: 1
   offset: {x: 0, y: 0, z: -1}
 --- !u!82 &1535802751085438486
 AudioSource:
