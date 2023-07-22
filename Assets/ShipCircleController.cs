@@ -103,7 +103,7 @@ public class ShipCircleController : MonoBehaviour
             Vector2 tangentVel = Vector3.Project(rb.velocity, tangent);
             Vector2 perpVel = Vector3.Project(rb.velocity, direction);
             // float currentPullForce = tetherPullForce * tetherPullCurve.Evaluate(tetherPullTimer / tetherPullTime);
-            Vector2 currentPullForce = direction * ((rb.mass * Mathf.Pow(tangentVel.magnitude, 2) ) / Vector2.Distance(tetheredObject.transform.position, transform.position)) - perpVel;
+            Vector2 currentPullForce = direction * ((rb.mass * Mathf.Pow(tangentVel.magnitude, 2) ) / Vector2.Distance(tetheredObject.transform.position, transform.position)) - perpVel + Vector2.Perpendicular(perpVel);
             rb.AddForce(currentPullForce);
             tetherPullTimer += Time.fixedDeltaTime;
         }
