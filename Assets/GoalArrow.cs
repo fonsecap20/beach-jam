@@ -26,7 +26,7 @@ public class GoalArrow : MonoBehaviour
         if(goal != null){
             // float angle = Vector2.Angle(gameObject.transform.position, goal.transform.position);
             float angle = 180/Mathf.PI*Mathf.Atan2(goal.transform.position.y-gameObject.transform.position.y,goal.transform.position.x-gameObject.transform.position.x);
-            Debug.Log("Angle to goal: "+angle);
+            // Debug.Log("Angle to goal: "+angle);
             gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
